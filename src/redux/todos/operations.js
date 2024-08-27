@@ -1,5 +1,5 @@
 import axios from "axios";
-import { deleteTodo, setErrorStatus, setLoadingStatus } from "./slice";
+
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://66cc7349a4dd3c8a71b7a9d5.mockapi.io/";
@@ -57,3 +57,15 @@ export const deleteTodoThunk = createAsyncThunk(
 //     dispatch(setLoadingStatus(false));
 //   }
 // };
+
+export const addTodoThunk = createAsyncThunk(
+  "addTodo",
+  async (body, thunkAPI) => {
+    try {
+      const { data } = await axios.post("todos", body);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
