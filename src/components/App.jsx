@@ -1,9 +1,11 @@
-import Counter from "./Counter/Counter";
+// import Counter from "./Counter/Counter";
+import { TodoList } from "./TodoList/TodoList";
 
 const App = () => {
   return (
     <div>
-      <Counter />
+      {/* <Counter /> */}
+      <TodoList />
     </div>
   );
 };
