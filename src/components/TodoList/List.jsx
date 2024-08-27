@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectTodos } from "../../redux/todos/selectors";
 // import { deleteTodo } from "../../redux/todos/slice";
 import { selectFilter } from "../../redux/filter/selectors";
-import { deleteTodoThunk } from "../../redux/todos/operations";
+import { deleteTodoThunk, toggleTodoThunk } from "../../redux/todos/operations";
 
 export const List = () => {
   const todos = useSelector(selectTodos);
@@ -17,6 +17,11 @@ export const List = () => {
     <ul>
       {filteredData.map((item) => (
         <li key={item.id}>
+          <input
+            type="checkbox"
+            checked={item.completed}
+            onChange={() => dispatch(toggleTodoThunk(item))}
+          />
           <p>{item.todo}</p>
           <button onClick={() => dispatch(deleteTodoThunk(item.id))}>
             Delete

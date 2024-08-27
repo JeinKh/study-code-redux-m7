@@ -69,3 +69,19 @@ export const addTodoThunk = createAsyncThunk(
     }
   }
 );
+
+export const toggleTodoThunk = createAsyncThunk(
+  "toggleTodo",
+  async (body, thunkAPI) => {
+    try {
+      const { data } = await axios.put(`todos/${body.id}`, {
+        ...body,
+        completed: !body.completed,
+      });
+      console.log(data);
+      return body.id;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
